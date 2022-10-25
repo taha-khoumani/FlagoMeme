@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+    max-width: 100vw;
+}
+#landing-page{
+    background-color: #2dccd4;
+    width: 100vw;
+    height: 100vh;
+}
+#landing-page-background{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #2dccd4;
+    position: fixed;
+
+}
+#landing-page-background-img{
+    height: 100vh;
+}
+#player-choose{
+    display: flex;
+    background-color: black;
+    z-index: 1;
+    position: static;
+}
