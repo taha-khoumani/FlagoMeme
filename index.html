@@ -6,16 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" type="module"></script>
-    <title>Flags Game</title>
+    <title>The Flag Game</title>
+    <!-- icon links-->
+    <script src="https://kit.fontawesome.com/d2a31f31ee.js" crossorigin="anonymous"></script>
+    <!-- fonts links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500&family=Nova+Square&family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
     <section id="landing-page">
         <div id="landing-page-background"> 
             <img id="landing-page-background-img" src="./Data/images/background.webp" alt="the background">
         </div>
-        <div id="player-choose">
-            <div><button></button></div>
-            <div><button></button></div>
+        <div id="start-game-container">
+            <div id="start-game-container-1">  
+                <h1>The Flag Game</h1>  
+                <div id="start-game"> 
+                    <div id="start"> 
+                        <p id="start-p">START</p>
+                        <button id="player1">1 player</button> 
+                        <button id="players2">2 players</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="level" class="out">
+        <div id="level-f">
+            <div id="level-header">
+                <i id="return-icon" class="fa-solid fa-rotate-left"></i>
+            </div>
+            <div id="level-chosing-f">
+                <div id="level-chosing-f1">
+                    <div id="level-chosing">
+                        <button id="easy">easy</button>
+                        <button id="normal">normal</button>
+                        <button id="hard">hard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="game">
+        <div id="game-header">
+            <i id="menu-icon" class="fa-solid fa-bars"></i>
         </div>
     </section>
 </body>
