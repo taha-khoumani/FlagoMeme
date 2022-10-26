@@ -10,7 +10,7 @@ const body = document.querySelector("body")
     const easy = document.querySelector("#easy")
     const normal = document.querySelector("#normal")
     const hard = document.querySelector("#hard")
-    //game variables
+    //game variables      
     const game = document.querySelector("#game")
     const menu = document.querySelector("#menu-icon")
 //needed functions
