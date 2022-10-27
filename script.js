@@ -20,30 +20,50 @@ const body = document.querySelector("body")
     const reset = document.querySelector("#reset")
 //needed functions
 function move(a,b){
-    b.classList.remove("out")
-    a.classList.add("out")
+    b.forEach( s => {
+        s.classList.remove("out")
+    });
+    a.forEach( x => {
+        x.classList.add("out")
+    });
+}
+function up(a){
+    a.style.zIndex = 1;
+}
+function down (a){
+    a.style.zIndex = 0;
 }
 //moving to level
     //landing page event listeners
     landingPagePlayer1.addEventListener("click",function(){
-        move(landingPage,level)
+        move([landingPage],[level])
     })
     //level event listeners
     levelReturn.addEventListener("click",function(e){
-        move(level,landingPage)
+        move([level],[landingPage])
     })
     easy.addEventListener("click",function(e){
-        move(level,game)
+        move([level],[game,menuPopUp])
     })
     normal.addEventListener("click",function(e){
-        move(level,game)
+        move([level],[game,menuPopUp])
     })
     hard.addEventListener("click",function(e){
-        move(level,game)
+        move([level],[game,menuPopUp])
     })
     //game event listener
     menuIcon.addEventListener("click",function(e){
-        move(game,menuPopUp)
+        up(menuPopUp)
     })
-    //menu Pop-up event listener
-    
+    //menuPopup event listeners
+    continu.addEventListener("click",function(e){
+        down(menuPopUp)
+    })
+    reset.addEventListener("click",function(){
+        down(menuPopUp)
+    })
+    mainMenu.addEventListener("click",function(e){
+        down(menuPopUp)
+        move([game,menuPopUp],[landingPage])
+    })
+
