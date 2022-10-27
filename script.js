@@ -12,7 +12,12 @@ const body = document.querySelector("body")
     const hard = document.querySelector("#hard")
     //game variables      
     const game = document.querySelector("#game")
-    const menu = document.querySelector("#menu-icon")
+    const menuIcon = document.querySelector("#menu-icon")
+    //menu variables
+    const menuPopUp = document.querySelector("#menu-f1")
+    const continu = document.querySelector("#continue")
+    const mainMenu = document.querySelector("#main-menu")
+    const reset = document.querySelector("#reset")
 //needed functions
 function move(a,b){
     b.classList.remove("out")
@@ -37,7 +42,8 @@ function move(a,b){
         move(level,game)
     })
     //game event listener
-        //game header event listener
-        menu.addEventListener("click",function(e){
-            move(game,level)
-        })
+    menuIcon.addEventListener("click",function(e){
+        move(game,menuPopUp)
+    })
+    //menu Pop-up event listener
+    
