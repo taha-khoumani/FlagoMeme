@@ -3,12 +3,12 @@
     --teeBlue:#07a3ae;
     --darkBlue:#018292;
     --backBlue:#2dccd4;
+    --game:'Press Start 2P', cursive;
 }
 body{
     margin: 0;
     max-width: 100vw;
-    font-family: 'Nova Square', cursive;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Press Start 2P', cursive;
     background-color: var(--backBlue);
 }
 #landing-page-background{
@@ -21,6 +21,7 @@ body{
 #landing-page-background-img{
     height: 100vh;
 }
+
 #start-game-container{
     display: flex;
     justify-content: center;
@@ -32,28 +33,37 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap:50px;
 }
 #start{
     background-color: bisque;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 5px;
-    gap: 5px;
+    gap: 10px;
+    width:310px ;
 }
 #start-p{
-    font-weight: 900;
-    margin:0 0 5px 0;
-    width: 100%;
+    margin:0 0 15px 0;
     text-align: center;
+    font-size: 26px;
 }
 #player1,#players2{
     font-family: 'Poppins', sans-serif;
-    width: 100%;
+    width:250px;
+    height: 50px;
+    font-size: 20px;
+    font-family: var(--game);
 }
-h1{
-    background-color: #2dccd4;
+/*                                       */
+#start-game{
+    display: flex;
+    justify-content: center;
+}
+#title{
+    font-size: 50px;
 }
 .out{
     display: none !important;
