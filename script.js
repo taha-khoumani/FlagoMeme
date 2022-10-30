@@ -25,6 +25,9 @@ import { flags } from "./data/code/array.js"
     const quiz = document.querySelector("#quiz")
     let  timerHtml = document.querySelector("#timer")
     let isThat;
+    const gameFooter = document.querySelector("#game-footer")
+    //timer vars
+    let timerJs
 //WEIRD PARTS--------------------------------------------------------------------------------------------------------------
 let save = []
 let num ;
@@ -137,7 +140,7 @@ function clear(){
 function timer(s,func){
     let t = (s*1000)+1000
     let to = new Date().getTime()+t;
-    let timerJs = setInterval(function(){
+    timerJs = setInterval(function(){
         var now = new Date().getTime()
         var timeLeft = Math.floor((to-now)/1000);
         timerHtml.innerText=`${timeLeft}`
@@ -154,31 +157,44 @@ function hide(){
         a.style.display = "none"
     })
 }
+function fuckid(id){
+    let regex = /^./gi
+    id = id.replace(regex,"")
+    return id
+}
 function yes(el){
     el.parentElement.classList.add("yes")
 }
 function no(el){
     el.parentElement.classList.add("no")
-    let dr = document.querySelector(`#i${isThat.getAttribute("id")[1]}`)
-    console.log(dr)
-    dr.classList.add("yes")
+    let dr = document.querySelector(`#i${fuckid(isThat.getAttribute("id"))}`)
+    dr.parentElement.classList.add("yes")
     
 }
 function test(img){
-    if(img.getAttribute("id")[1] === isThat.getAttribute("id")[1]){
+    if(fuckid(img.getAttribute("id")) === fuckid(isThat.getAttribute("id"))){
         yes(img)
     }
     else{
         no(img)
     }
 }
+function next(){
+    let next = document.createElement("button")
+    next.innerText = "Next"
+    next.classList.add("next")
+    gameFooter.append(next)
+}
+
 function testTime(){
+    timer(10)
     hide()
     whatIs()
     let ces = Array.from(document.querySelectorAll(".flag"))
     ces.forEach(a =>{
-        a.addEventListener("click",function(e){test(e.target)})
+        a.addEventListener("click",function(e){test(e.target);next();clearInterval(timerJs)})
     })
+
 }
 //EVENT LISTENERS---------------------------------------------------------------------------------------------------
 //landing page event listeners
