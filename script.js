@@ -33,6 +33,15 @@ import { flags } from "./data/code/array.js"
     container.append(question)
     //timer vars
     let timerJs
+    //resutl variables
+    let rounds = 0;
+    const results = document.querySelector("#results")
+    const score = document.querySelector("#score")
+    let points = 0;
+    let restart = document.querySelector("#restart-b")
+    let pussys =1;
+    let usu;
+    let usa;
 //WEIRD PARTS--------------------------------------------------------------------------------------------------------------
 let save = []
 let num ;
@@ -131,19 +140,29 @@ function makeCountry(n){
     return div
 }
 function display(arr){
-    while(question.firstElementChild) question.removeChild(question.firstElementChild)
-    clear()
-    idys=[]
-    arr.forEach((num,ind)=>{
-        quiz.append(makeCountry(num))
-    })
+    if(rounds === pussys){
+        move([menuPopUp,game],[results])
+        score.innerText = `${points}/${difficultyN}`
+        rounds =0;
+    }
+    else{
+        rounds++
+        points =0;
+        score.innerText = "";
+        while(question.firstElementChild){  question.removeChild(question.firstElementChild) }
+        clear()
+        idys=[]
+        arr.forEach((num,ind)=>{
+            quiz.append(makeCountry(num))
+        })
+    }
 }
 function clear(){
     Array.from(quiz.children).forEach((country,ind) =>{
         quiz.removeChild(country)
     })
 }
-function timer(s,func){
+function timer(s,func){ 
     let t = (s*1000)+1000
     let to = new Date().getTime()+t;
     timerJs = setInterval(function(){
@@ -179,6 +198,7 @@ function no(el){
 }
 function test(img){
     if(fuckid(img.getAttribute("id")) === fuckid(isThat.getAttribute("id"))){
+        points++
         yes(img)
     }
     else{
@@ -202,7 +222,7 @@ function timeDown(){
         timer(difficultyS,testTime)
     })
 }
-function testTime(){
+function testTime(){;
     timer(5,timeDown)
     hide()
     whatIs()
@@ -212,14 +232,25 @@ function testTime(){
             test(e.target);
             next();
             nextB = document.querySelector(".next")
-            nextB.addEventListener("click",function(){
-                nextB.remove()
-                display(provide(difficultyN))
-                timer(difficultyS,testTime)
-            });
-            clearInterval(timerJs)})
+            if(rounds === pussys){
+                clearInterval(timerJs)
+                nextB.removeEventListener("click",usu)
+                 usa = nextB.addEventListener("click",function(){
+                    nextB.remove()
+                    display(provide(difficultyN))
+                });
+            }
+            else{
+                nextB.removeEventListener("click",usa)
+                 usu = nextB.addEventListener("click",function(){
+                    nextB.remove()
+                    display(provide(difficultyN))
+                    timer(difficultyS,testTime)
+                });
+            }
+            clearInterval(timerJs)
+        })
     })
-
 }
 //EVENT LISTENERS---------------------------------------------------------------------------------------------------
 //landing page event listeners
@@ -232,7 +263,7 @@ levelReturn.addEventListener("click",function(e){
 })
 normal.addEventListener("click",function(e){
     move([level],[game,menuPopUp])
-    difficultyS = 4
+    difficultyS = 5
     difficultyN = 4
     display(provide(difficultyN))
 })
@@ -243,10 +274,11 @@ easy.addEventListener("click",function(e){
     display(provide(difficultyN))
     timer(difficultyS,testTime)
 })
+
 hard.addEventListener("click",function(e){
     move([level],[game,menuPopUp])
     difficultyN = 5
-    difficultyS =3
+    difficultyS =5
     display(provide(difficultyN))
 })
 //game event listener
@@ -263,5 +295,12 @@ reset.addEventListener("click",function(){
 mainMenu.addEventListener("click",function(e){
     down(menuPopUp)
     move([game,menuPopUp],[landingPage])
+})
+//results event listener
+restart.addEventListener("click",function(e){
+    clearInterval(timerJs)
+    move([results],[game,menuPopUp])
+    display(provide(difficultyN))
+    timer(difficultyS,testTime)
 })
 //EXECUTIONS----------------------------------------------------------------------------------------------------------
