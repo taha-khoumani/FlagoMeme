@@ -66,7 +66,6 @@ function ranid(arr){
     return arr[Math.floor(Math.random()*arr.length)]
 }
 function whatIs(){
-    while(question.firstElementChild) question.removeChild(question.firstElementChild)
     let namo = document.querySelector(`#${ranid(idys)}`)
     isThat = document.createElement("p")
     isThat.innerText = namo.innerText
@@ -132,6 +131,7 @@ function makeCountry(n){
     return div
 }
 function display(arr){
+    while(question.firstElementChild) question.removeChild(question.firstElementChild)
     clear()
     idys=[]
     arr.forEach((num,ind)=>{
@@ -211,13 +211,13 @@ function testTime(){
         a.addEventListener("click",function(e){
             test(e.target);
             next();
-            clearInterval(timerJs)})
             nextB = document.querySelector(".next")
             nextB.addEventListener("click",function(){
                 nextB.remove()
                 display(provide(difficultyN))
                 timer(difficultyS,testTime)
             });
+            clearInterval(timerJs)})
     })
 
 }
