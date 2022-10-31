@@ -1,5 +1,7 @@
 import { flags } from "./data/code/array.js"
 //VARIABLES-NEDEED----------------------------------------------------------------------------------------------------------
+    let difficultyN ;
+    let difficultyS;
     //landing page variables
     const landingPage = document.querySelector("#landing-page")
     const landingPagePlayer1 = document.querySelector("#player1")
@@ -26,6 +28,9 @@ import { flags } from "./data/code/array.js"
     let  timerHtml = document.querySelector("#timer")
     let isThat;
     const gameFooter = document.querySelector("#game-footer")
+    let nextB;
+    let question = document.createElement("div")
+    container.append(question)
     //timer vars
     let timerJs
 //WEIRD PARTS--------------------------------------------------------------------------------------------------------------
@@ -61,12 +66,13 @@ function ranid(arr){
     return arr[Math.floor(Math.random()*arr.length)]
 }
 function whatIs(){
+    while(question.firstElementChild) question.removeChild(question.firstElementChild)
     let namo = document.querySelector(`#${ranid(idys)}`)
     isThat = document.createElement("p")
     isThat.innerText = namo.innerText
     isThat.classList.add("question")
     isThat.setAttribute("id",`${namo.getAttribute("id")}`)
-    container.append(isThat)
+    question.append(isThat)
 }
 function isnot(n){
     let is = used.every(not =>{
@@ -185,14 +191,33 @@ function next(){
     next.classList.add("next")
     gameFooter.append(next)
 }
-
+function timeDown(){
+    let rch = document.querySelector(`#${isThat.getAttribute("id")}`)
+    yes(rch)
+    next()
+    nextB = document.querySelector(".next")
+    nextB.addEventListener("click",function(){
+        nextB.remove()
+        display(provide(difficultyN))
+        timer(difficultyS,testTime)
+    })
+}
 function testTime(){
-    timer(10)
+    timer(5,timeDown)
     hide()
     whatIs()
     let ces = Array.from(document.querySelectorAll(".flag"))
     ces.forEach(a =>{
-        a.addEventListener("click",function(e){test(e.target);next();clearInterval(timerJs)})
+        a.addEventListener("click",function(e){
+            test(e.target);
+            next();
+            clearInterval(timerJs)})
+            nextB = document.querySelector(".next")
+            nextB.addEventListener("click",function(){
+                nextB.remove()
+                display(provide(difficultyN))
+                timer(difficultyS,testTime)
+            });
     })
 
 }
@@ -207,13 +232,22 @@ levelReturn.addEventListener("click",function(e){
 })
 normal.addEventListener("click",function(e){
     move([level],[game,menuPopUp])
+    difficultyS = 4
+    difficultyN = 4
+    display(provide(difficultyN))
 })
 easy.addEventListener("click",function(e){
     move([level],[game,menuPopUp])
-    timer(5,testTime)
+    difficultyN = 3
+    difficultyS = 5
+    display(provide(difficultyN))
+    timer(difficultyS,testTime)
 })
 hard.addEventListener("click",function(e){
     move([level],[game,menuPopUp])
+    difficultyN = 5
+    difficultyS =3
+    display(provide(difficultyN))
 })
 //game event listener
 menuIcon.addEventListener("click",function(e){
@@ -231,4 +265,3 @@ mainMenu.addEventListener("click",function(e){
     move([game,menuPopUp],[landingPage])
 })
 //EXECUTIONS----------------------------------------------------------------------------------------------------------
-display(provide(3))
