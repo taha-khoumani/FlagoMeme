@@ -8,7 +8,19 @@ import { flags } from "./data/code/array.js"
     const landingPagePlayer2 = document.querySelector("#players2")
     //level variables
     const level = document.querySelector("#level")
-    const levelReturn = document.querySelector("#return-icon")
+    //0011
+    const levelReturn = document.querySelector("#lreturn-icon")
+    const gameReturn = document.querySelector("#greturn-icon")
+    const resetReturn = document.querySelector("#rreturn-icon")
+    //00
+    const levelSound = document.querySelector("#lsound")
+    const gameSound = document.querySelector("#gsound")
+    const resetSound = document.querySelector("#rsound")
+    //00
+    const levelMusic = document.querySelector("#lmusic")
+    const gameMusic = document.querySelector("#gmusic")
+    const resetMusic = document.querySelector("#rmusic")
+    //0011
     const easy = document.querySelector("#easy")
     const normal = document.querySelector("#normal")
     const hard = document.querySelector("#hard")
@@ -164,11 +176,9 @@ function makeCountry(n){
     return div
 }
 function display(arr){
-    console.log(rounds,pussys)
     if(rounds === pussys && rounds !== 0){
-        move([menuPopUp,game],[results])
+        move([game],[results])
         score.innerText = `${points}/${pussys}`
-        console.log(rounds,pussys)
     }
     else{
         unshow(nike)
@@ -181,7 +191,6 @@ function display(arr){
         arr.forEach((num,ind)=>{
             quiz.append(makeCountry(num))
         })
-        console.log(rounds,pussys)
     }
 }
 function clear(){
@@ -312,12 +321,37 @@ function testTime(){;
 landingPagePlayer1.addEventListener("click",function(){
     move([landingPage],[level])
 })
-//level event listeners
+//0011
 levelReturn.addEventListener("click",function(e){
     move([level],[landingPage])
 })
+gameReturn.addEventListener("click",function(e){
+    clearInterval(timerJs)
+    rounds =0;
+    unshow(nike)
+    noNext()
+    unshow(adidas)
+    points =0;
+    while(question.firstElementChild){question.removeChild(question.firstElementChild) }
+    clear()
+    idys=[]
+    move([game],[level])
+})
+resetReturn.addEventListener("click",function(e){
+    clearInterval(timerJs)
+    rounds =0;
+    unshow(nike)
+    noNext()
+    unshow(adidas)
+    points =0;
+    while(question.firstElementChild){question.removeChild(question.firstElementChild) }
+    clear()
+    idys=[]
+    move([results],[level])
+})
+//0011
 normal.addEventListener("click",function(e){
-    move([level],[game,menuPopUp])
+    move([level],[game])
     difficultyS = 4
     difficultyN = 4 //don't touch this line please bro
     pussys = 1
@@ -326,7 +360,7 @@ normal.addEventListener("click",function(e){
     timer(difficultyS,testTime)
 })
 easy.addEventListener("click",function(e){
-    move([level],[game,menuPopUp])
+    move([level],[game])
     difficultyN = 3 //don't touch this line please bro
     difficultyS = 5
     pussys = 1
@@ -336,7 +370,7 @@ easy.addEventListener("click",function(e){
 })
 
 hard.addEventListener("click",function(e){
-    move([level],[game,menuPopUp])
+    move([level],[game])
     difficultyN = 5 //don't touch this line please bro
     difficultyS =3
     pussys = 1
@@ -344,27 +378,12 @@ hard.addEventListener("click",function(e){
     display(provide(difficultyN))
     timer(difficultyS,testTime)
 })
-//game event listener
-menuIcon.addEventListener("click",function(e){
-    up(menuPopUp)
-})
-//menuPopup event listeners
-continu.addEventListener("click",function(e){
-    down(menuPopUp)
-})
-reset.addEventListener("click",function(){
-    down(menuPopUp)
-})
-mainMenu.addEventListener("click",function(e){
-    down(menuPopUp)
-    move([game,menuPopUp],[landingPage])
-})
 //results event listener
 restart.addEventListener("click",function(e){
     clearInterval(timerJs)
     rounds =0;
     display(provide(difficultyN))
-    move([results],[game,menuPopUp])
+    move([results],[game])
     timer(difficultyS,testTime)
 })
 //EXECUTIONS----------------------------------------------------------------------------------------------------------

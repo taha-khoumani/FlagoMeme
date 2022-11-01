@@ -94,7 +94,7 @@ body{
     border-width: 1px;
     margin: 20px;
 }
-#return-icon,#menu-icon{
+#lreturn-icon,#greturn-icon,#rreturn-icon{
     font-size: 50px;
     color:var(--darkBlue);
     padding: 30px;
@@ -166,19 +166,16 @@ body{
     margin-bottom: 3px;
     gap: 10px;
 }
-#volume{
-    font-size: 40px;
-    background-color: black;
-    color: white;
+#lvolume,#gvolume,#rvolume{
+    font-size: 50px;
+    color: var(--darkBlue);
     border-radius: 5px;
-    padding: 10px 45px;
 }
-#music{
-    font-size: 40px;
-    background-color: black;
-    color: white;
+#lmusic,#gmusic,#rmusic{
+    font-size: 50px;
+    color: var(--darkBlue);
     border-radius: 5px;
-    padding:10px 50px;
+    padding-left: 30px;
     text-align: center;
 
 }
@@ -208,7 +205,7 @@ body{
     max-height:100px ;
 }
 .flag{
-    /*height:180px;*/
+    height:120px;
     border-radius: 5px;
     box-shadow: 1px 1px 10px 1px gray;
 }
