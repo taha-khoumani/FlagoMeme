@@ -35,12 +35,11 @@ body{
 #start-game-container-1{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap:50px;
+    justify-content: start;
+    margin-top: 100px;
+    gap:80px;
 }
 #start{
-    background-color: bisque;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,12 +52,19 @@ body{
     text-align: center;
     font-size: 26px;
 }
-#player1,#players2{
+#player1{
     font-family: 'Poppins', sans-serif;
-    width:250px;
-    height: 50px;
-    font-size: 20px;
+    width:200px;
+    height: 70px;
+    font-size: 30px;
+    font-weight: 600;
     font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+    border-style: solid;
+    background-color:turquoise;
+    color: black;
+    border-color: black;
+    border-width: 4px;
 }
 /*                                       */
 #start-game{
@@ -192,14 +198,17 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 30px;
 }
 #quiz{
     display: flex;
     gap: 30px;
-
+}
+.smaller{
+    max-height:100px ;
 }
 .flag{
-    height:180px;
+    /*height:180px;*/
     border-radius: 5px;
     box-shadow: 1px 1px 10px 1px gray;
 }
@@ -208,6 +217,18 @@ body{
     font-size: 25px;
     font-weight: 900;
     margin:0;
+}
+.question{
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: black;
+}
+.question-div{
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 #timer{
     padding:20px 0 0 30px;
@@ -224,16 +245,16 @@ body{
     padding:20px
 }
 .yes{
-    background-color: lightgreen;
     border-style: solid;
     border-color: green;
     border-width: 5px;
+    background-color: lightgreen;
 }
 .no{
-    background-color: lightcoral;
     border-style: solid;
     border-color: red;
     border-width: 5px;
+    background-color: lightcoral;
 }
 #game-footer{
     padding-top: 40px;
@@ -251,4 +272,60 @@ body{
     font-size: 20px;
     border-width: 0;
     box-shadow: 0px 0px 6px 1px gray;
+}
+#restart-b{
+    font-family: 'Poppins', sans-serif; 
+    background-color: lightgreen;
+    padding: 10px;
+    margin-right: 85px;
+    margin-bottom: 65px;
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    border-width: 0;
+    box-shadow: 0px 0px 6px 1px gray;
+}
+#results{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+}
+#result-header{
+    display: flex;
+    justify-content: center;
+    gap:20px
+}
+#restart{
+    display: flex;
+    justify-content: end;
+}
+#its,#score{
+    font-size: 40px;
+    font-weight: 1000;
+}
+#question{
+    margin: 20px;
+}
+.lebron{
+    display: flex;
+    justify-content: center;
+}
+#nike{
+    padding: 20px;
+    background-color: green;
+    color: white;
+    border-radius: 100%;
+    font-size: 50px;
+}
+#adidas{
+    padding: 20px;
+    background-color: red;
+    color: white;
+    width: 50px;
+    text-align: center;
+    border-radius: 100%;
+    font-size: 50px;
 }

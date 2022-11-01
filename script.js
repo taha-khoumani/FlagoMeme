@@ -30,7 +30,22 @@ import { flags } from "./data/code/array.js"
     const gameFooter = document.querySelector("#game-footer")
     let nextB;
     let question = document.createElement("div")
+    question.classList.add("question-div")
     container.append(question)
+    let nextb = document.querySelector(".next")
+    const nike = document.createElement("i")
+        nike.classList.add("fa-sharp","fa-solid","fa-check")
+        nike.classList.add("out")
+        nike.setAttribute("id","nike")
+    const adidas = document.createElement("i")
+        adidas.classList.add("fa-sharp","fa-solid","fa-xmark")
+        adidas.classList.add("out")
+        adidas.setAttribute("id","adidas")
+    const lebron = document.createElement("div")
+        lebron.classList.add("lebron")
+    lebron.append(nike,adidas)
+    container.append(lebron)
+    let chooseS;
     //timer vars
     let timerJs
     //resutl variables
@@ -39,7 +54,7 @@ import { flags } from "./data/code/array.js"
     const score = document.querySelector("#score")
     let points = 0;
     let restart = document.querySelector("#restart-b")
-    let pussys =1;
+    let pussys;
     let usu;
     let usa;
 //WEIRD PARTS--------------------------------------------------------------------------------------------------------------
@@ -57,6 +72,12 @@ function newNum(){
 }
 //00
 //FUNCTIONS NEDEED------------------------------------------------------------------------------------------------------------
+function show(el){
+    el.classList.remove("out")
+}
+function unshow(el){
+    el.classList.add("out")
+}
 function move(a,b){
     b.forEach( s => {
         s.classList.remove("out")
@@ -77,7 +98,7 @@ function ranid(arr){
 function whatIs(){
     let namo = document.querySelector(`#${ranid(idys)}`)
     isThat = document.createElement("p")
-    isThat.innerText = namo.innerText
+    isThat.innerText = `${namo.innerText} = ?`
     isThat.classList.add("question")
     isThat.setAttribute("id",`${namo.getAttribute("id")}`)
     question.append(isThat)
@@ -123,6 +144,9 @@ function makeFlag(n){
     img.setAttribute("src",pathOf(n))
     img.setAttribute("alt",nameOf(n))
     img.classList.add("flag")
+    if(difficultyN ===5 || difficultyN === 4){
+        img.classList.add("smaller")
+    }
     return img
 }
 function makeName(n){
@@ -140,21 +164,24 @@ function makeCountry(n){
     return div
 }
 function display(arr){
-    if(rounds === pussys){
+    console.log(rounds,pussys)
+    if(rounds === pussys && rounds !== 0){
         move([menuPopUp,game],[results])
-        score.innerText = `${points}/${difficultyN}`
-        rounds =0;
+        score.innerText = `${points}/${pussys}`
+        console.log(rounds,pussys)
     }
     else{
+        unshow(nike)
+        unshow(adidas)
         rounds++
         points =0;
-        score.innerText = "";
-        while(question.firstElementChild){  question.removeChild(question.firstElementChild) }
+        while(question.firstElementChild){question.removeChild(question.firstElementChild) }
         clear()
         idys=[]
         arr.forEach((num,ind)=>{
             quiz.append(makeCountry(num))
         })
+        console.log(rounds,pussys)
     }
 }
 function clear(){
@@ -189,12 +216,20 @@ function fuckid(id){
 }
 function yes(el){
     el.parentElement.classList.add("yes")
+    show(nike)
+    Array.from(quiz.children).filter(a=>{return a !== el.parentElement}).forEach(a=>{a.classList.add("no")})
 }
 function no(el){
     el.parentElement.classList.add("no")
     let dr = document.querySelector(`#i${fuckid(isThat.getAttribute("id"))}`)
     dr.parentElement.classList.add("yes")
-    
+    Array.from(quiz.children).filter(a=>{return a !== el.parentElement && dr.parentElement !== a}).forEach(a=>{a.classList.add("no")})
+    show(adidas)
+}
+function nacl(el){
+    el.parentElement.classList.add("yes")
+    Array.from(quiz.children).filter(a=>{return a !== el.parentElement}).forEach(a=>{a.classList.add("no")})
+    show(adidas)
 }
 function test(img){
     if(fuckid(img.getAttribute("id")) === fuckid(isThat.getAttribute("id"))){
@@ -206,24 +241,41 @@ function test(img){
     }
 }
 function next(){
-    let next = document.createElement("button")
-    next.innerText = "Next"
-    next.classList.add("next")
-    gameFooter.append(next)
+    nextb.classList.remove("out")
+}
+function noNext(){
+    nextb.classList.add("out")
 }
 function timeDown(){
     let rch = document.querySelector(`#${isThat.getAttribute("id")}`)
-    yes(rch)
+    nacl(rch)
     next()
     nextB = document.querySelector(".next")
+    /*
     nextB.addEventListener("click",function(){
         nextB.remove()
         display(provide(difficultyN))
         timer(difficultyS,testTime)
-    })
+    })*/
+    if(rounds === pussys){
+        clearInterval(timerJs)
+        nextB.removeEventListener("click",usu)
+         usa = nextB.addEventListener("click",function(){
+            noNext()
+            display(provide(difficultyN))
+        });
+    }
+    else{
+        nextB.removeEventListener("click",usa)
+         usu = nextB.addEventListener("click",function(){
+            noNext()
+            display(provide(difficultyN))
+            timer(difficultyS,testTime)
+        });
+    }
 }
 function testTime(){;
-    timer(5,timeDown)
+    timer(chooseS,timeDown)
     hide()
     whatIs()
     let ces = Array.from(document.querySelectorAll(".flag"))
@@ -233,22 +285,25 @@ function testTime(){;
             next();
             nextB = document.querySelector(".next")
             if(rounds === pussys){
+                console.log("up")
+
                 clearInterval(timerJs)
                 nextB.removeEventListener("click",usu)
                  usa = nextB.addEventListener("click",function(){
-                    nextB.remove()
+                    noNext()
                     display(provide(difficultyN))
                 });
             }
             else{
+                console.log("down")
+                clearInterval(timerJs)
                 nextB.removeEventListener("click",usa)
                  usu = nextB.addEventListener("click",function(){
-                    nextB.remove()
+                    noNext()
                     display(provide(difficultyN))
                     timer(difficultyS,testTime)
                 });
             }
-            clearInterval(timerJs)
         })
     })
 }
@@ -263,23 +318,31 @@ levelReturn.addEventListener("click",function(e){
 })
 normal.addEventListener("click",function(e){
     move([level],[game,menuPopUp])
-    difficultyS = 5
-    difficultyN = 4
+    difficultyS = 4
+    difficultyN = 4 //don't touch this line please bro
+    pussys = 1
+    chooseS = 5
     display(provide(difficultyN))
+    timer(difficultyS,testTime)
 })
 easy.addEventListener("click",function(e){
     move([level],[game,menuPopUp])
-    difficultyN = 3
+    difficultyN = 3 //don't touch this line please bro
     difficultyS = 5
+    pussys = 1
+    chooseS = 5
     display(provide(difficultyN))
     timer(difficultyS,testTime)
 })
 
 hard.addEventListener("click",function(e){
     move([level],[game,menuPopUp])
-    difficultyN = 5
-    difficultyS =5
+    difficultyN = 5 //don't touch this line please bro
+    difficultyS =3
+    pussys = 1
+    chooseS = 4
     display(provide(difficultyN))
+    timer(difficultyS,testTime)
 })
 //game event listener
 menuIcon.addEventListener("click",function(e){
@@ -299,8 +362,9 @@ mainMenu.addEventListener("click",function(e){
 //results event listener
 restart.addEventListener("click",function(e){
     clearInterval(timerJs)
-    move([results],[game,menuPopUp])
+    rounds =0;
     display(provide(difficultyN))
+    move([results],[game,menuPopUp])
     timer(difficultyS,testTime)
 })
 //EXECUTIONS----------------------------------------------------------------------------------------------------------
