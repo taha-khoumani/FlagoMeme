@@ -199,8 +199,15 @@ body{
 }
 #quiz{
     display: flex;
-    flex-direction:column ;
+    flex-direction:column 
     gap: 30px;
+}
+@media (min-width: 600px) {
+    #quiz{
+    display: flex;
+    flex-direction:column 
+    gap: 30px;
+    } 
 }
 .smaller{
     max-height:100px ;
