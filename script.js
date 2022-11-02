@@ -363,7 +363,7 @@ easy.addEventListener("click",function(e){
     move([level],[game])
     difficultyN = 3 //don't touch this line please bro
     difficultyS = 5
-    pussys = 5
+    pussys = 1
     chooseS = 5
     display(provide(difficultyN))
     timer(difficultyS,testTime)
