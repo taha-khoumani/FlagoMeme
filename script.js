@@ -44,7 +44,6 @@ import { flags } from "./data/code/array.js"
     let question = document.createElement("div")
     question.classList.add("question-div")
     container.append(question)
-    let nextb = document.querySelector(".next")
     const nike = document.createElement("i")
         nike.classList.add("fa-sharp","fa-solid","fa-check")
         nike.classList.add("out")
@@ -58,6 +57,7 @@ import { flags } from "./data/code/array.js"
     lebron.append(nike,adidas)
     container.append(lebron)
     let chooseS;
+    let ces;
     //timer vars
     let timerJs
     //resutl variables
@@ -184,11 +184,10 @@ function display(arr){
         unshow(nike)
         unshow(adidas)
         rounds++
-        points =0;
-        while(question.firstElementChild){question.removeChild(question.firstElementChild) }
+        while(question.firstElementChild){question.removeChild(question.firstElementChild);}
         clear()
         idys=[]
-        arr.forEach((num,ind)=>{
+        arr.forEach((num)=>{
             quiz.append(makeCountry(num))
         })
     }
@@ -250,10 +249,10 @@ function test(img){
     }
 }
 function next(){
-    nextb.classList.remove("out")
+    nextB.classList.remove("out")
 }
 function noNext(){
-    nextb.classList.add("out")
+    nextB.classList.add("out")
 }
 function timeDown(){
     let rch = document.querySelector(`#${isThat.getAttribute("id")}`)
@@ -283,35 +282,36 @@ function timeDown(){
         });
     }
 }
-function testTime(){;
+function still(){
+    noNext()
+    display(provide(difficultyN))
+    timer(difficultyS,testTime);
+}
+function done (){
+    noNext()
+    display(provide(difficultyN))
+}
+function testTime(){
     timer(chooseS,timeDown)
     hide()
     whatIs()
-    let ces = Array.from(document.querySelectorAll(".flag"))
+    ces = Array.from(document.querySelectorAll(".flag"))
     ces.forEach(a =>{
         a.addEventListener("click",function(e){
+            nextB = document.querySelector(".next")
             test(e.target);
             next();
-            nextB = document.querySelector(".next")
+            nextB.removeEventListener("click",still)
+            nextB.removeEventListener("click",done)
             if(rounds === pussys){
-                console.log("up")
-
                 clearInterval(timerJs)
-                nextB.removeEventListener("click",usu)
-                 usa = nextB.addEventListener("click",function(){
-                    noNext()
-                    display(provide(difficultyN))
-                });
+                nextB.addEventListener("click",done);
             }
             else{
-                console.log("down")
                 clearInterval(timerJs)
-                nextB.removeEventListener("click",usa)
-                 usu = nextB.addEventListener("click",function(){
-                    noNext()
-                    display(provide(difficultyN))
-                    timer(difficultyS,testTime)
-                });
+                //BUG5
+                nextB.addEventListener("click",still);
+                //BUG5
             }
         })
     })
@@ -354,7 +354,7 @@ normal.addEventListener("click",function(e){
     move([level],[game])
     difficultyS = 4
     difficultyN = 4 //don't touch this line please bro
-    pussys = 1
+    pussys = 5
     chooseS = 5
     display(provide(difficultyN))
     timer(difficultyS,testTime)
@@ -363,7 +363,7 @@ easy.addEventListener("click",function(e){
     move([level],[game])
     difficultyN = 3 //don't touch this line please bro
     difficultyS = 5
-    pussys = 1
+    pussys = 5
     chooseS = 5
     display(provide(difficultyN))
     timer(difficultyS,testTime)
@@ -373,7 +373,7 @@ hard.addEventListener("click",function(e){
     move([level],[game])
     difficultyN = 5 //don't touch this line please bro
     difficultyS =3
-    pussys = 1
+    pussys = 5
     chooseS = 4
     display(provide(difficultyN))
     timer(difficultyS,testTime)
@@ -382,6 +382,7 @@ hard.addEventListener("click",function(e){
 restart.addEventListener("click",function(e){
     clearInterval(timerJs)
     rounds =0;
+    points =0;
     display(provide(difficultyN))
     move([results],[game])
     timer(difficultyS,testTime)
