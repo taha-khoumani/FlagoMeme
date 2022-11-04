@@ -67,8 +67,14 @@ import { flags } from "./data/code/array.js"
     let points = 0;
     let restart = document.querySelector("#restart-b")
     let pussys;
-    let usu;
-    let usa;
+    //memes vars
+    let containerM = document.querySelector("#meme")
+    let vid = document.createElement("video")
+    vid.setAttribute("autoplay","")
+    let meme = document.createElement("source")
+    vid.setAttribute("type","video/mp4")
+    vid.append(meme)
+    vid.classList.add("meme")
 //WEIRD PARTS--------------------------------------------------------------------------------------------------------------
 let save = []
 let num ;
@@ -175,10 +181,38 @@ function makeCountry(n){
     div.append(makeFlag(n),makeName(n))
     return div
 }
+function makeM(p){
+    if(containerM.firstElementChild){ 
+        containerM.removeChild(vid)
+        vid.removeChild(meme)
+    }
+    vid.removeAttribute("src")
+    if(p === 0){
+        vid.setAttribute("src","./data/memes/stoopid.mp4")
+    }
+    else if(p === 1){
+        vid.setAttribute("src","./data/memes/time.mp4")
+    }
+    else if(p === 2){
+        vid.setAttribute("src","./data/memes/augh.mp4")
+    }
+    else if(p === 3){
+        vid.setAttribute("src","./data/memes/ok.mp4")
+    }
+    else if(p === 4){
+        vid.setAttribute("src","./data/memes/nice.mp4")
+    }
+    else if(p === 5){
+        vid.setAttribute("src","./data/memes/siu.mp4")
+    }
+    vid.append(meme)
+    containerM.append(vid)
+}	
 function display(arr){
     if(rounds === pussys && rounds !== 0){
         move([game],[results])
         score.innerText = `${points}/${pussys}`
+        makeM(points)
     }
     else{
         unshow(nike)
@@ -252,34 +286,49 @@ function next(){
     nextB.classList.remove("out")
 }
 function noNext(){
-    nextB.classList.add("out")
+    if(nextB){
+        nextB.classList.add("out")
+    }
 }
 function timeDown(){
     let rch = document.querySelector(`#${isThat.getAttribute("id")}`)
     nacl(rch)
-    next()
     nextB = document.querySelector(".next")
+    next()
     /*
     nextB.addEventListener("click",function(){
         nextB.remove()
         display(provide(difficultyN))
         timer(difficultyS,testTime)
     })*/
+    // if(rounds === pussys){
+    //     clearInterval(timerJs)
+    //     nextB.removeEventListener("click",usu)
+    //      usa = nextB.addEventListener("click",function(){
+    //         noNext()
+    //         display(provide(difficultyN))
+    //     });
+    // }
+    // else{
+    //     nextB.removeEventListener("click",usa)
+    //      usu = nextB.addEventListener("click",function(){
+    //         noNext()
+    //         display(provide(difficultyN))
+    //         timer(difficultyS,testTime)
+    //     });
+    // }
+    //00
+    nextB.removeEventListener("click",still)
+    nextB.removeEventListener("click",done)
     if(rounds === pussys){
         clearInterval(timerJs)
-        nextB.removeEventListener("click",usu)
-         usa = nextB.addEventListener("click",function(){
-            noNext()
-            display(provide(difficultyN))
-        });
+        nextB.addEventListener("click",done);
     }
     else{
-        nextB.removeEventListener("click",usa)
-         usu = nextB.addEventListener("click",function(){
-            noNext()
-            display(provide(difficultyN))
-            timer(difficultyS,testTime)
-        });
+        clearInterval(timerJs)
+        //BUG5
+        nextB.addEventListener("click",still);
+        //BUG5
     }
 }
 function still(){
@@ -363,7 +412,7 @@ easy.addEventListener("click",function(e){
     move([level],[game])
     difficultyN = 3 //don't touch this line please bro
     difficultyS = 5
-    pussys = 5
+    pussys = 2
     chooseS = 5
     display(provide(difficultyN))
     timer(difficultyS,testTime)
