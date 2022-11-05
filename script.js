@@ -1,4 +1,5 @@
 import { flags } from "./data/code/array.js"
+import{music} from "./data/code/array.js"
 //VARIABLES-NEDEED----------------------------------------------------------------------------------------------------------
     let difficultyN ;
     let difficultyS;
@@ -78,7 +79,55 @@ import { flags } from "./data/code/array.js"
     //music variables
     const audio = document.querySelector("audio")
     const source = document.querySelector("source")
-    const music = ["./data/music/aot.mp3","./data/music/deathNote.mp3","./data/music/jojo.mp3","./data/music/konan.mp3","./data/music/naruto.mp3","./data/music/onePiece.mp3","./data/music/tG.mp3"]
+    //0088
+    let usedM =[]
+    let saveM = []
+    let numM ;
+    let newPlaylist;
+    //
+    function newMnum(){
+        saveM = []
+        saveM.push(Math.floor(Math.random()*(music.length)))
+        numM= saveM[0]
+    }
+    //
+    function isnotm(n){
+        let is = usedM.every(not =>{
+        return not !== n
+        })
+        return is
+    }
+    //
+    function newOrder(file){
+        usedM =[]
+        saveM=[]
+        let abou = file.map(song=>{
+            newMnum()
+            while(isnotm(numM) === false ){
+                newMnum()
+            }
+            usedM.push(numM)
+            return file[numM]
+        })
+        newPlaylist = abou
+        return newPlaylist
+    }
+    //
+    // function playlist(audi,file){
+    //     let count =0;
+    //     audi.setAttribute("src",file[count])
+    //     audi.onended = function replay (){ 
+    //         if(file.length-2<count){
+    //             count=-1
+    //         }
+    //         count++
+    //         audi.removeAttribute("src")
+    //         audi.setAttribute("src",file[count])
+    //     }
+    // }
+    //ex
+    // console.log(newPlaylist)
+    //0088
 //WEIRD PARTS--------------------------------------------------------------------------------------------------------------
 let save = []
 let num ;
@@ -92,7 +141,6 @@ function newNum(){
     save.push(Math.floor(Math.random()*flags.length))
     num= save[0]
 }
-//00
 //FUNCTIONS NEDEED------------------------------------------------------------------------------------------------------------
 function show(el){
     el.classList.remove("out")
@@ -100,6 +148,7 @@ function show(el){
 function playlist(audi,file){
     let count =0;
     audi.setAttribute("src",file[count])
+    audi.setAttribute("autoplay","")
     audi.onended = function replay (){ 
         if(file.length-2<count){
             console.log(file.length,count)
@@ -107,11 +156,12 @@ function playlist(audi,file){
         }
         count++
         audi.removeAttribute("src")
+        audi.setAttribute("autoplay","")
         audi.setAttribute("src",file[count])
     }
 }
-//run
-playlist(audio,music)
+playlist(audio,newOrder(music))
+console.log(newPlaylist)
 function unshow(el){
     el.classList.add("out")
 }
@@ -160,7 +210,6 @@ function random(){
         used.push(num)
         return num
     }
-
 }
 function pathOf(n){
     return flags[n].path
@@ -458,4 +507,3 @@ restart.addEventListener("click",function(e){
     timer(difficultyS,testTime)
 })
 //EXECUTIONS----------------------------------------------------------------------------------------------------------
-console.log(flags.length)

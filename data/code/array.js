@@ -51,3 +51,4 @@
 ,{nam: 'Zambia', path: 'data/images/flags/Zambia.png', usd: 'false'}
 ,{nam: 'Zimbabwe', path: 'data/images/flags/Zimbabwe.png', usd: 'false'}
   ]
+export const music = ["./data/music/aot.mp3","./data/music/deathNote.mp3","./data/music/jojo.mp3","./data/music/konan.mp3","./data/music/naruto.mp3","./data/music/onePiece.mp3","./data/music/tG.mp3"]
