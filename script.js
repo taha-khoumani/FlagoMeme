@@ -75,17 +75,21 @@ import { flags } from "./data/code/array.js"
     vid.setAttribute("type","video/mp4")
     vid.append(meme)
     vid.classList.add("meme")
+    //music variables
+    const audio = document.querySelector("audio")
+    const source = document.querySelector("source")
+    const music = ["./data/music/aot.mp3","./data/music/deathNote.mp3","./data/music/jojo.mp3","./data/music/konan.mp3","./data/music/naruto.mp3","./data/music/onePiece.mp3","./data/music/tG.mp3"]
 //WEIRD PARTS--------------------------------------------------------------------------------------------------------------
 let save = []
 let num ;
 function randomBeta(){ 
-    return(Math.floor(Math.random()*51))
+    return(Math.floor(Math.random()*flags.length))
 }
 save.push(randomBeta())
 num= save[0]
 function newNum(){
     save = []
-    save.push(Math.floor(Math.random()*51))
+    save.push(Math.floor(Math.random()*flags.length))
     num= save[0]
 }
 //00
@@ -93,6 +97,21 @@ function newNum(){
 function show(el){
     el.classList.remove("out")
 }
+function playlist(audi,file){
+    let count =0;
+    audi.setAttribute("src",file[count])
+    audi.onended = function replay (){ 
+        if(file.length-2<count){
+            console.log(file.length,count)
+            count=-1
+        }
+        count++
+        audi.removeAttribute("src")
+        audi.setAttribute("src",file[count])
+    }
+}
+//run
+playlist(audio,music)
 function unshow(el){
     el.classList.add("out")
 }
@@ -128,7 +147,7 @@ function isnot(n){
     return is
 }
 function random(){
-    if(used.length === 51){
+    if(used.length === flags.length){
         used = []
         newNum()
         used.push(num)
@@ -212,6 +231,7 @@ function display(arr){
     if(rounds === pussys && rounds !== 0){
         move([game],[results])
         score.innerText = `${points}/${pussys}`
+        audio.pause()
         makeM(points)
     }
     else{
@@ -432,8 +452,10 @@ restart.addEventListener("click",function(e){
     clearInterval(timerJs)
     rounds =0;
     points =0;
+    audio.play()
     display(provide(difficultyN))
     move([results],[game])
     timer(difficultyS,testTime)
 })
 //EXECUTIONS----------------------------------------------------------------------------------------------------------
+console.log(flags.length)
