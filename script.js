@@ -34,6 +34,7 @@ import{music} from "./data/code/array.js"
     const mainMenu = document.querySelector("#main-menu")
     const reset = document.querySelector("#reset")
     //game vars
+    let sempai;
     let idys = []
     const container = document.querySelector("#quiz-f")
     let used = []
@@ -79,6 +80,10 @@ import{music} from "./data/code/array.js"
     //music variables
     const audio = document.querySelector("audio")
     const source = document.querySelector("source")
+    const lmusicIcon = document.querySelector("#lmusic-icon")
+    const gmusicIcon = document.querySelector("#gmusic-icon")
+    const lmusiIcon = document.querySelector("#lmusi-icon")
+    const gmusiIcon = document.querySelector("#gmusi-icon")
     //0088
     let usedM =[]
     let saveM = []
@@ -364,29 +369,6 @@ function timeDown(){
     nacl(rch)
     nextB = document.querySelector(".next")
     next()
-    /*
-    nextB.addEventListener("click",function(){
-        nextB.remove()
-        display(provide(difficultyN))
-        timer(difficultyS,testTime)
-    })*/
-    // if(rounds === pussys){
-    //     clearInterval(timerJs)
-    //     nextB.removeEventListener("click",usu)
-    //      usa = nextB.addEventListener("click",function(){
-    //         noNext()
-    //         display(provide(difficultyN))
-    //     });
-    // }
-    // else{
-    //     nextB.removeEventListener("click",usa)
-    //      usu = nextB.addEventListener("click",function(){
-    //         noNext()
-    //         display(provide(difficultyN))
-    //         timer(difficultyS,testTime)
-    //     });
-    // }
-    //00
     nextB.removeEventListener("click",still)
     nextB.removeEventListener("click",done)
     if(rounds === pussys){
@@ -410,29 +392,42 @@ function done (){
     display(provide(difficultyN))
 }
 function testTime(){
+    sempai =0;
     timer(chooseS,timeDown)
     hide()
     whatIs()
     ces = Array.from(document.querySelectorAll(".flag"))
     ces.forEach(a =>{
         a.addEventListener("click",function(e){
-            nextB = document.querySelector(".next")
-            test(e.target);
-            next();
-            nextB.removeEventListener("click",still)
-            nextB.removeEventListener("click",done)
-            if(rounds === pussys){
-                clearInterval(timerJs)
-                nextB.addEventListener("click",done);
-            }
-            else{
-                clearInterval(timerJs)
-                //BUG5
-                nextB.addEventListener("click",still);
-                //BUG5
+            if(sempai === 0){
+                sempai++
+                nextB = document.querySelector(".next")
+                test(e.target);
+                next();
+                nextB.removeEventListener("click",still)
+                nextB.removeEventListener("click",done)
+                if(rounds === pussys){
+                    clearInterval(timerJs)
+                    nextB.addEventListener("click",done);
+                }
+                else{
+                    clearInterval(timerJs)
+                    //BUG5
+                    nextB.addEventListener("click",still);
+                    //BUG5
+                }
             }
         })
     })
+}
+function slach(el){
+    let s = "fa-solid fa-music-slash".split(" ")
+    el.classList.add(...s)
+    el.classList.remove("fa-solid","fa-music")
+}
+function unslach(el){
+    el.classList.remove("fa-solid","fa-music-slash")
+    el.classList.add("fa-solid","fa-music")
 }
 //EVENT LISTENERS---------------------------------------------------------------------------------------------------
 //landing page event listeners
@@ -456,6 +451,8 @@ gameReturn.addEventListener("click",function(e){
     move([game],[level])
 })
 resetReturn.addEventListener("click",function(e){
+    audio.play()
+    vid.pause()
     clearInterval(timerJs)
     rounds =0;
     unshow(nike)
@@ -466,6 +463,27 @@ resetReturn.addEventListener("click",function(e){
     clear()
     idys=[]
     move([results],[level])
+})
+//
+lmusicIcon.addEventListener("click",function(e){
+    audio.pause()
+    lmusicIcon.style.display = "none"
+    lmusiIcon.style.display = "inline"
+})
+lmusiIcon.addEventListener("click",function(e){
+    audio.play()
+    lmusiIcon.style.display = "none"
+    lmusicIcon.style.display = "inline"
+})
+gmusicIcon.addEventListener("click",function(e){
+    audio.pause()
+    gmusicIcon.style.display = "none"
+    gmusiIcon.style.display = "inline"
+})
+gmusiIcon.addEventListener("click",function(e){
+    audio.play()
+    gmusiIcon.style.display = "none"
+    gmusicIcon.style.display = "inline"
 })
 //0011
 normal.addEventListener("click",function(e){
@@ -486,7 +504,6 @@ easy.addEventListener("click",function(e){
     display(provide(difficultyN))
     timer(difficultyS,testTime)
 })
-
 hard.addEventListener("click",function(e){
     move([level],[game])
     difficultyN = 5 //don't touch this line please bro
@@ -502,6 +519,7 @@ restart.addEventListener("click",function(e){
     rounds =0;
     points =0;
     audio.play()
+    vid.pause()
     display(provide(difficultyN))
     move([results],[game])
     timer(difficultyS,testTime)

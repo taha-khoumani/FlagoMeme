@@ -94,10 +94,13 @@ body{
     border-width: 1px;
     margin: 20px;
 }
-#lreturn-icon,#greturn-icon,#rreturn-icon{
+#lreturn-icon,#greturn-icon,#rreturn-icon,#lmusic-icon,#gmusic-icon,#lmusi-icon,#gmusi-icon{
     font-size: 50px;
     color:var(--darkBlue);
-    padding: 30px;
+    padding: 30px 10px 30px 30px;
+}
+#lmusi-icon,#gmusi-icon{
+    display: none;
 }
 #level-chosing{
     display: flex;
