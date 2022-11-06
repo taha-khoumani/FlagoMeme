@@ -340,7 +340,7 @@ body{
 .meme{
     min-height: 100%;
 }
-@media(width <= 400px){
+@media(width <= 500px){
     #easy,#normal,#hard{
         height: 100px;
         width: 300px;
@@ -375,23 +375,24 @@ body{
         gap: 10px;
     }
     .quizA{
-        padding: 0 50px;
         display: grid !important;
         grid-template-columns: 1fr 1fr;
         gap:10px;
     } 
     .country{
+        height: auto;
         padding:15px 10px 0 10px;
         gap:0;
     }
     .five{
         display: flex;
+        justify-content: center;
         max-width: 80%;
         flex-direction: column;
         gap:0px;
         border-radius: 5px;
         background-color: white;
-        padding:10px
+        padding:10px 10px 0 10px;
     }
     .flag{
         max-width: 150px;
