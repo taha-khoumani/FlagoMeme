@@ -57,7 +57,7 @@ import{music} from "./data/code/array.js"
     const lebron = document.createElement("div")
         lebron.classList.add("lebron")
     lebron.append(nike,adidas)
-    if(window.innerWidth <= 400){
+    if(window.innerWidth <= 500){
         document.querySelector("#game-header .halal").append(lebron)
     }
     else{
@@ -306,7 +306,7 @@ function display(arr){
         while(question.firstElementChild){question.removeChild(question.firstElementChild);}
         clear()
         idys=[]
-        if(window.innerWidth <= 400 && difficultyN >= 4){
+        if(window.innerWidth <= 500 && difficultyN >= 4){
             quiz.classList.add("quizA")
         }
         arr.forEach((num)=>{
