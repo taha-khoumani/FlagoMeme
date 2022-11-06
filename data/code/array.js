@@ -34,7 +34,6 @@
 ,{nam: 'Poland', path: 'data/images/flags/Poland.png', usd: 'false'}
 ,{nam: 'Saint Kitts and Nevis', path: 'data/images/flags/Saint_Kitts_and_Nevis.png', usd: 'false'}
 ,{nam: 'Saint Lucia', path: 'data/images/flags/Saint_Lucia.png', usd: 'false'}
-,{nam: 'Saint Vincent and the Grenadines', path: 'data/images/flags/Saint_Vincent_and_the_Grenadines.png', usd: 'false'}
 ,{nam: 'Senegal', path: 'data/images/flags/Senegal.png', usd: 'false'}
 ,{nam: 'Serbia', path: 'data/images/flags/Serbia.png', usd: 'false'}
 ,{nam: 'Seychelles', path: 'data/images/flags/Seychelles.png', usd: 'false'}

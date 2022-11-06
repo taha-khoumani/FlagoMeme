@@ -57,7 +57,12 @@ import{music} from "./data/code/array.js"
     const lebron = document.createElement("div")
         lebron.classList.add("lebron")
     lebron.append(nike,adidas)
-    container.append(lebron)
+    if(window.innerWidth <= 400){
+        document.querySelector("#game-header .halal").append(lebron)
+    }
+    else{
+        container.append(lebron)
+    }
     let chooseS;
     let ces;
     //timer vars
@@ -235,7 +240,7 @@ function makeFlag(n){
     img.setAttribute("src",pathOf(n))
     img.setAttribute("alt",nameOf(n))
     img.classList.add("flag")
-    if(difficultyN ===5 || difficultyN === 4){
+    if(difficultyN === 6 || difficultyN === 4){
         img.classList.add("smaller")
     }
     return img
@@ -251,6 +256,9 @@ function makeName(n){
 function makeCountry(n){
     let div = document.createElement("div")
     div.classList.add("country")
+    if(difficultyN === 6){
+        div.classList.add("five")
+    }
     div.append(makeFlag(n),makeName(n))
     return div
 }
@@ -282,9 +290,12 @@ function makeM(p){
     containerM.append(vid)
 }	
 function display(arr){
+    if(quiz.classList.contains("quizA")){
+        quiz.classList.remove("quizA")
+    }
     if(rounds === pussys && rounds !== 0){
         move([game],[results])
-        score.innerText = `${points}/${pussys}`
+        score.innerText = ` ${points}/${pussys}`
         audio.pause()
         makeM(points)
     }
@@ -295,6 +306,9 @@ function display(arr){
         while(question.firstElementChild){question.removeChild(question.firstElementChild);}
         clear()
         idys=[]
+        if(window.innerWidth <= 400 && difficultyN >= 4){
+            quiz.classList.add("quizA")
+        }
         arr.forEach((num)=>{
             quiz.append(makeCountry(num))
         })
@@ -476,6 +490,7 @@ lmusiIcon.addEventListener("click",function(e){
     lmusicIcon.style.display = "inline"
 })
 gmusicIcon.addEventListener("click",function(e){
+    clearInterval(timerJs)
     audio.pause()
     gmusicIcon.style.display = "none"
     gmusiIcon.style.display = "inline"
@@ -499,14 +514,14 @@ easy.addEventListener("click",function(e){
     move([level],[game])
     difficultyN = 3 //don't touch this line please bro
     difficultyS = 5
-    pussys = 2
+    pussys = 5
     chooseS = 5
     display(provide(difficultyN))
     timer(difficultyS,testTime)
 })
 hard.addEventListener("click",function(e){
     move([level],[game])
-    difficultyN = 5 //don't touch this line please bro
+    difficultyN = 6 //don't touch this line please bro
     difficultyS =3
     pussys = 5
     chooseS = 4
@@ -524,4 +539,4 @@ restart.addEventListener("click",function(e){
     move([results],[game])
     timer(difficultyS,testTime)
 })
-//EXECUTIONS----------------------------------------------------------------------------------------------------------
+//resize----------------------------------------------------------------------------------------------------------
