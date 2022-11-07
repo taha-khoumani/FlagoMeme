@@ -446,6 +446,7 @@ function unslach(el){
 //EVENT LISTENERS---------------------------------------------------------------------------------------------------
 //landing page event listeners
 landingPagePlayer1.addEventListener("click",function(){
+    audio.play()
     move([landingPage],[level])
 })
 //0011
@@ -483,15 +484,21 @@ lmusicIcon.addEventListener("click",function(e){
     audio.pause()
     lmusicIcon.style.display = "none"
     lmusiIcon.style.display = "inline"
+    gmusicIcon.style.display = "none"
+    gmusiIcon.style.display = "inline"
 })
 lmusiIcon.addEventListener("click",function(e){
     audio.play()
     lmusiIcon.style.display = "none"
     lmusicIcon.style.display = "inline"
+    gmusiIcon.style.display = "none"
+    gmusicIcon.style.display = "inline"
 })
 gmusicIcon.addEventListener("click",function(e){
     clearInterval(timerJs)
     audio.pause()
+    lmusicIcon.style.display = "none"
+    lmusiIcon.style.display = "inline"
     gmusicIcon.style.display = "none"
     gmusiIcon.style.display = "inline"
 })
@@ -499,6 +506,8 @@ gmusiIcon.addEventListener("click",function(e){
     audio.play()
     gmusiIcon.style.display = "none"
     gmusicIcon.style.display = "inline"
+    lmusiIcon.style.display = "none"
+    lmusicIcon.style.display = "inline"
 })
 //0011
 normal.addEventListener("click",function(e){

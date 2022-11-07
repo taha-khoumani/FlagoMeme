@@ -148,6 +148,7 @@ body{
 #game-header{
     display: flex;
     justify-content: space-between;
+    /* padding: 5px; */
 }
 #menu-f{
     height: 100%;
@@ -233,15 +234,24 @@ body{
     width: 100%;
 }
 #timer{
-    padding:30px 40px 30px 0px;
+    padding:40px 40px 30px 0px;
     font-size: 30px;
-    margin:0;
-    height: auto;
+    margin:30px;
+    padding:0;
+    /* padding-bottom: 5px; */
+    height:  40px;
+    width: 40px;
+    text-align: center;
+    border-style: solid;
+    border-width: 10px;
+    border-radius: 100%;
+    border-color:var(--darkBlue);
 }
 .country{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap:20px;
     border-radius: 5px;
     background-color: white;
@@ -353,9 +363,9 @@ body{
         display: flex;
         flex-direction: column;
         position: absolute;
-        justify-content: space-between;
+        justify-content: flex-start;
         top: 0;
-        gap:5px;
+        gap:30px;
         background-color: var(--backBlue);
         max-height: 100vh;
         width: 100vw;
@@ -369,20 +379,27 @@ body{
         font-size: 20px;
         margin: 0;
     }
+    .question{
+        font-size: 21px;
+    }
     #quiz{
+        margin-top:25px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        grid-row-gap:15px;
+        grid-column-gap:0px;
     }
     .quizA{
         display: grid !important;
         grid-template-columns: 1fr 1fr;
-        gap:10px;
+        justify-items: center;
     } 
-    .country{
+    .country{ 
         height: auto;
-        padding:15px 10px 0 10px;
+        max-width: 80%;
+        padding:10px 13px 0 13px;
         gap:0;
+        box-sizing:content-box;
     }
     .five{
         display: flex;
@@ -403,9 +420,9 @@ body{
         display: inline;
     }
     #nike{
+        margin-top: 10px;
         padding: 15px;
         font-size: 30px;
-        margin-left: 20px;
         position: relative;
         bottom: 5px;
     }
@@ -416,20 +433,33 @@ body{
         font-size: 30px;
     }
     #lreturn-icon,#greturn-icon,#rreturn-icon,#lmusic-icon,#gmusic-icon,#lmusi-icon,#gmusi-icon{
+        margin-top: 5px;
         padding:0;
     }
     #timer{
+        margin-top: 5px;
         padding:0;
+        /* padding-bottom: 5px; */
+        height:  40px;
+        width: 60px;
+        text-align: center;
+        border-style: solid;
+        border-width: 10px;
+        border-radius: 100%;
+        border-color:var(--darkBlue);
     }
     .next{
-        margin-bottom: 30px;
-        margin-right: 40px;
+        /* margin-bottom: 30px;
+        margin-right: 40px; */
+        margin:0;
     }
     #game-footer{
-        padding-top:10px;
-    }
-    .game{
-        gap:5px;
+        /* padding-top:10px; */
+        display: flex;
+        margin: auto;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
     }
     #quiz-f{
         height: 100%;
@@ -437,8 +467,8 @@ body{
         gap:10px;
     }
     #results{
-        justify-content: flex-start;
-        gap:100px;
+        justify-content: space-around;
+        /* gap:100px; */
     }
     #result-header{
         display: flex;
@@ -452,9 +482,12 @@ body{
         margin: 0;
     }
     .halal{
+        width:100%;
         display: flex;
+        justify-content: space-evenly;
         gap:10px;
-        padding: 5px 0 0 5px;
+        /* margin: 5px 0 0 5px; */
+
     }
     .haram{
         display: flex;
@@ -464,8 +497,12 @@ body{
     video{
         max-width: 90%;
     }
+    #restart{
+        justify-content: center;
+    }
     #restart-b{
-        position: absolute;
-        bottom: 50px;
+        /* position: absolute;
+        bottom: 50px; */
+        margin:0;
     }
 }
