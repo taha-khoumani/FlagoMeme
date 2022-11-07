@@ -495,7 +495,6 @@ lmusiIcon.addEventListener("click",function(e){
     gmusicIcon.style.display = "inline"
 })
 gmusicIcon.addEventListener("click",function(e){
-    clearInterval(timerJs)
     audio.pause()
     lmusicIcon.style.display = "none"
     lmusiIcon.style.display = "inline"
